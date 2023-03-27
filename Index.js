@@ -4,6 +4,9 @@ const bcrypt = require('bcrypt');
 const app = express();
 const cors = require('cors');
 app.use(cors());
+
+
+//connect to mongodb
 const mongoose = require('mongoose');
 const mongourl = "mongodb+srv://login:Ulfath+123@cluster0.dhuj3ry.mongodb.net/?retryWrites=true&w=majority";
 
@@ -16,13 +19,13 @@ mongoose.connect(mongourl, { useNewUrlParser: true }).then(() => {
 });
 
 
-// Define User schema
+// // Define User schema
 const userSchema = new mongoose.Schema({
-    name: { type: String, required: true },
-    email: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
+     name: { type: String, required: true },
+     email: { type: String, required: true, unique: true },
+     password: { type: String, required: true },
     confirmPassword: { type: String, required: true }
-  });
+   });
   
   // Create User model
   const User = mongoose.model('User', userSchema);
@@ -30,22 +33,15 @@ const userSchema = new mongoose.Schema({
   // Middleware to parse JSON
   app.use(express.json());
   
-  // Route handler for signup form submission
+  // Api for signup
   app.post('/api/signup', async (req, res) => {
-    // const { name, email, password, confirmPassword } = req.body;
     try {
       // Check if user already exists
       const existingUser = await User.findOne({ email : req.body.email });
       if (existingUser) {
         return res.status(400).json({ message: 'Email already exists' });
       }
-      // // Hash password
-      // const salt = await bcrypt.genSalt(10);
-      // const hashedPassword = await bcrypt.hash(password, salt);
-  
-      // Create new user
-      // const newUser = new User({ name, email, password,confirmPassword});
-  
+      
       // Save the user to the database
       await new User({...req.body}).save();
   
@@ -57,7 +53,7 @@ const userSchema = new mongoose.Schema({
     }
   });
 
-
+//Api for login
   app.post("/api/auth", async (req, res) => {
     try {
       const user = await User.findOne({ email: req.body.email });
@@ -75,17 +71,6 @@ const userSchema = new mongoose.Schema({
       res.status(500).send({ message: "Internal Server Error" });
     }
   });
-
-
-
-
- 
-// Handling GET request
-app.get('/', (req, res) => {
-    res.send('A simple Node App is '
-        + 'running on this server')
-    res.end()
-})
  
 // Port Number
 const PORT = process.env.PORT ||3001;
