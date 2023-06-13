@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const eventtypes = require("./routes/eventTypes");
 const eventconfigure = require("./routes/eventConfigure");
+const apiIntegration = require("./routes/apiIntegration");
 const connectToDatabase = require("./utils/database");
 
 const app = express();
@@ -19,6 +20,7 @@ app.get("/", async (req, res) => {
 
 app.use("/api/eventtypes", eventtypes);
 app.use("/api/eventconfigure", eventconfigure);
+app.use("/api/apiintegration", apiIntegration);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
