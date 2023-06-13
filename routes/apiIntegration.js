@@ -26,6 +26,8 @@ router.post("/", async (req, res) => {
     description,
     type,
     pack,
+    sname,
+    nameSpaces,
   } = req.body;
 
   const newApi = new api({
@@ -37,6 +39,8 @@ router.post("/", async (req, res) => {
     description,
     type,
     pack,
+    nameSpaces,
+    sname,
   });
 
   await newApi.save();
