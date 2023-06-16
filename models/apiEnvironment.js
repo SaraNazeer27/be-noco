@@ -17,6 +17,8 @@ const userSchema = new mongoose.Schema({
   description: String,
   type: String,
   pack: String,
+  webServices: Array,
+  basicAuthenticationRest: Array,
 });
 
 module.exports = mongoose.model("api", userSchema);
