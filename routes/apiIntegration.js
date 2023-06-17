@@ -14,6 +14,18 @@ router.get("/", async (req, res) => {
   }
 });
 
+router.get("/:id", async (req, res) => {
+  try {
+    const apiUser = await api.find({ _id: req.params.id });
+    console.log(apiUser);
+    // res.send(apiApplication);
+    res.json(apiUser[0]);
+  } catch (error) {
+    console.error("Error retrieving data:", error);
+    res.status(500).json({ message: "Error retrieving data" });
+  }
+});
+
 router.post("/", async (req, res) => {
   console.log(req.body);
 
@@ -21,63 +33,39 @@ router.post("/", async (req, res) => {
     fname,
     selectedOption,
     webURI,
-    type,
-    quantity,
+    tries,
     description,
-    selectedOptionRestType,
-    fnameRest,
-    webURIRestMethod,
-    webURIRestComplete,
-    quantityRest,
-    descriptionRest,
-    name,
-    parameterType,
-    elementPath,
-    number,
-    dataType,
-    lname,
-    selectedType,
-    codeAddress,
-    showBasic,
-    username,
-    password,
-    selectedAuthentication,
     webServices,
-    basicAuthenticationRest,
+    type,
+    basicAuthentication,
+    nameSpace,
 
     selectedOptionSoapType,
-    snameSoap,
-    quantitySoap,
+    webServiceName,
+    responseTime,
     messageSoap,
     action,
-    requestParametersSoap,
-    responseParametersSoap,
+    selectedOptionContentType,
+    selectedOptionRestType,
+    completeAddress,
+    methodAddress,
+    webServiceDescription,
 
-    sname,
-    swebURI,
-    squantity,
-    sdescription,
-    webServicesSoap,
-    stype,
-    basicAuthenticationSoap,
+    parameterName,
+    parameterType,
+    elementPath,
+    dataType,
 
-    nameSoap,
-    sparameterTypeSoap,
-    selementPathSoap,
-    sdataTypeSoap,
+    responseParameterName,
+    responseParameterType,
+    responseElementPath,
+    dataTypeResponse,
+    codeResponse,
 
-    lnameSoap,
-    parameterTypeSoap,
-    elementPathSoap,
-    dataTypeSoap,
-
-    showSBasic,
-    susername,
-    spassword,
-
-    selectedAuthenticationSoap,
-    usernameSoap,
-    passwordSoap,
+    selectedAuthentication,
+    username,
+    password,
+    showBasic,
   } = req.body;
 
   // let { type } = req.body;
@@ -88,65 +76,41 @@ router.post("/", async (req, res) => {
 
   const newApi = new api({
     fname,
-    type,
     selectedOption,
     webURI,
-    quantity,
+    tries,
     description,
-    selectedOptionRestType,
-    fnameRest,
-    webURIRestMethod,
-    webURIRestComplete,
-    quantityRest,
-    descriptionRest,
-    name,
-    parameterType,
-    elementPath,
-    number,
-    dataType,
-    lname,
-    selectedType,
-    codeAddress,
-    showBasic,
-    username,
-    password,
-    selectedAuthentication,
     webServices,
-    basicAuthenticationRest,
+    type,
+    basicAuthentication,
+    nameSpace,
 
     selectedOptionSoapType,
-    snameSoap,
-    quantitySoap,
+    webServiceName,
+    responseTime,
     messageSoap,
     action,
-    requestParametersSoap,
-    responseParametersSoap,
+    selectedOptionContentType,
+    selectedOptionRestType,
+    completeAddress,
+    methodAddress,
+    webServiceDescription,
 
-    sname,
-    swebURI,
-    squantity,
-    sdescription,
-    webServicesSoap,
-    stype,
-    basicAuthenticationSoap,
+    parameterName,
+    parameterType,
+    elementPath,
+    dataType,
 
-    lnameSoap,
-    parameterTypeSoap,
-    elementPathSoap,
-    dataTypeSoap,
+    responseParameterName,
+    responseParameterType,
+    responseElementPath,
+    dataTypeResponse,
+    codeResponse,
 
-    showSBasic,
-    susername,
-    spassword,
-
-    selectedAuthenticationSoap,
-    usernameSoap,
-    passwordSoap,
-
-    nameSoap,
-    sparameterTypeSoap,
-    selementPathSoap,
-    sdataTypeSoap,
+    selectedAuthentication,
+    username,
+    password,
+    showBasic,
   });
 
   await newApi.save();
