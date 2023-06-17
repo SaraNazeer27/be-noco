@@ -118,4 +118,95 @@ router.post("/", async (req, res) => {
   res.send("created");
 });
 
+router.put("/:id", async (req, res) => {
+  const {
+    fname,
+    selectedOption,
+    webURI,
+    tries,
+    description,
+    webServices,
+    type,
+    basicAuthentication,
+    nameSpace,
+
+    selectedOptionSoapType,
+    webServiceName,
+    responseTime,
+    messageSoap,
+    action,
+    selectedOptionContentType,
+    selectedOptionRestType,
+    completeAddress,
+    methodAddress,
+    webServiceDescription,
+
+    parameterName,
+    parameterType,
+    elementPath,
+    dataType,
+
+    responseParameterName,
+    responseParameterType,
+    responseElementPath,
+    dataTypeResponse,
+    codeResponse,
+
+    selectedAuthentication,
+    username,
+    password,
+    showBasic,
+  } = req.body;
+
+  try {
+    const updatedApi = await api.findOneAndUpdate(
+      { _id: req.params.id }, // Find the document by ID
+      {
+        fname,
+        selectedOption,
+        webURI,
+        tries,
+        description,
+        webServices,
+        type,
+        basicAuthentication,
+        nameSpace,
+
+        selectedOptionSoapType,
+        webServiceName,
+        responseTime,
+        messageSoap,
+        action,
+        selectedOptionContentType,
+        selectedOptionRestType,
+        completeAddress,
+        methodAddress,
+        webServiceDescription,
+
+        parameterName,
+        parameterType,
+        elementPath,
+        dataType,
+
+        responseParameterName,
+        responseParameterType,
+        responseElementPath,
+        dataTypeResponse,
+        codeResponse,
+
+        selectedAuthentication,
+        username,
+        password,
+        showBasic,
+      },
+      { new: true } // Return the updated document
+    );
+
+    res.json(updatedApi);
+  } catch (error) {
+    console.error("Error updating data:", error);
+    res.status(500).json({ message: "Error updating data" });
+  }
+});
+
 module.exports = router;

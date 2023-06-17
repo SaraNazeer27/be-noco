@@ -13,12 +13,11 @@ const userSchema = new mongoose.Schema({
   selectedOption: String,
   webURI: String,
   code: Number,
-  quantity: Number,
+  tries: Number,
   description: String,
   type: String,
-  pack: String,
   webServices: Array,
-  basicAuthenticationRest: Array,
+  basicAuthentication: Array,
 });
 
 module.exports = mongoose.model("api", userSchema);
